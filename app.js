@@ -1,13 +1,18 @@
-const express = require('express');
-const morgan = require('morgan');
 const dotenv = require('dotenv');
-require('colors');
-const bootcamps = require('./routes/bootcamps');
-const connectDB = require('./config/db');
-const errorHandler = require('./middleware/errorHandler');
-
 // Load env vars
 dotenv.config({ path: './config/config.env' });
+
+const express = require('express');
+const morgan = require('morgan');
+const colors = require('colors');
+
+const connectDB = require('./config/db');
+
+// Routes
+const bootcamps = require('./routes/bootcamps');
+const courses = require('./routes/courses');
+
+const errorHandler = require('./middleware/errorHandler');
 
 // Connect to database
 connectDB();
@@ -24,6 +29,7 @@ app.use(express.json());
 
 // Mount routes
 app.use('/api/v1/bootcamps', bootcamps);
+app.use('/api/v1/courses', courses);
 
 // Error handler middleware
 app.use(errorHandler);
