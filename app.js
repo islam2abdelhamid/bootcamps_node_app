@@ -1,9 +1,10 @@
 const express = require('express');
+const morgan = require('morgan');
 const dotenv = require('dotenv');
 require('colors');
 const bootcamps = require('./routes/bootcamps');
 const connectDB = require('./config/db');
-const errorHandler = require('./middleware/error');
+const errorHandler = require('./middleware/errorHandler');
 
 // Load env vars
 dotenv.config({ path: './config/config.env' });
@@ -12,6 +13,11 @@ dotenv.config({ path: './config/config.env' });
 connectDB();
 
 const app = express();
+
+// Logger middleware
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // Body parser
 app.use(express.json());
