@@ -1,10 +1,13 @@
 const dotenv = require('dotenv');
+
 // Load env vars
 dotenv.config({ path: './config/config.env' });
 
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const colors = require('colors');
+const fileUpload = require('express-fileupload');
 
 const connectDB = require('./config/db');
 
@@ -26,6 +29,12 @@ if (process.env.NODE_ENV === 'development') {
 
 // Body parser
 app.use(express.json());
+
+// File uploads
+app.use(fileUpload());
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount routes
 app.use('/api/v1/bootcamps', bootcamps);

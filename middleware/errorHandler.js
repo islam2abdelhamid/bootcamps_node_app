@@ -7,7 +7,7 @@ const errorHandler = (err, req, res, next) => {
   // Mongoose bad object id & id not found
   if (err.name === 'CastError' || err.name === 'NotFound') {
     error = new ErrorResponse(
-      `Bootcamp not found with id of ${err.value}`,
+      `No record match of ${err.value}`,
       404
     );
   }
