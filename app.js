@@ -6,8 +6,8 @@ dotenv.config({ path: './config/config.env' });
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-const colors = require('colors');
 const fileUpload = require('express-fileupload');
+require('colors');
 
 const connectDB = require('./config/db');
 
@@ -57,3 +57,5 @@ server.on('unhandledRejection', (err, promise) => {
   console.log(`Error: ${err.message}`).red;
   server.close(() => process.exit(1));
 });
+
+//  😱
